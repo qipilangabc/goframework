@@ -1,6 +1,10 @@
 package v1
 
-import "net/http"
+import (
+	"myfmw/v1/output"
+	"net/http"
+
+)
 
 type Context struct {
 	Rw http.ResponseWriter
@@ -9,6 +13,11 @@ type Context struct {
 	routeName string
 	method string
 	Param Params
+}
+
+func (c *Context) Json (value interface{}) {
+	Json := output.Json{}
+	Json.Content(c.Rw, value)
 }
 
 func (c *Context) Reset(rw http.ResponseWriter,req *http.Request,core *app)  {
